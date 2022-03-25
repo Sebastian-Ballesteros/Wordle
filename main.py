@@ -3,10 +3,10 @@ import random
 import numpy as np
 from colorama import Fore
 
-local_name = "Wordle_words"
 punctuation = "&',.-()?1234567890"
 
 def five_dict_create(url, word_length):
+
     words = []
     with urlopen(url) as fp:
         for line in fp:
@@ -17,10 +17,10 @@ def five_dict_create(url, word_length):
             if len(line) == word_length:
                 words.append(line)
     return words
-
 url = "https://raw.githubusercontent.com/dwyl/english-words/master/words.txt"
 
 words = five_dict_create(url, 5)
+
 game_word = random.choice(words)
 
 for i in range(0, len(words)):
@@ -81,21 +81,10 @@ while count < 5:
                 pop_words.append(word)
 
     pop_words = np.unique(pop_words)
-    print(len(pop_words) / len(words_array))
+    print(f"{len(pop_words) / len(words_array)}% of remaining words eliminated")
     try:
         words_array = np.delete(words_array, pop_words, axis=0)
-        print(len(words_array))
+        print(f"{len(words_array)} words left in the dictionary")
     except:
         print("You typed the same letter twice")
         break
-
-
-
-
-
-
-
-
-
-
-
