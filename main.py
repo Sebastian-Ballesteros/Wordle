@@ -84,7 +84,7 @@ while count < 5:
     print(f"{len(pop_words) / len(words_array)}% of remaining words eliminated")
     try:
         words_array = np.delete(words_array, pop_words, axis=0)
-        print(f"{len(words_array)} words left in the dictionary")
+        print(f"{len(words_array)} words left in words_array")
     except:
         print("The word you typed has no new letters")
         break
