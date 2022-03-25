@@ -5,7 +5,7 @@ import numpy as np
 local_name = "Wordle_words"
 punctuation = "&',.-()?1234567890"
 
-def five_dict_create(url):
+def five_dict_create(url, word_length):
     words = []
     with urlopen(url) as fp:
         for line in fp:
@@ -13,13 +13,13 @@ def five_dict_create(url):
             for p in punctuation:
                 line = line.replace(p, "hello world")
             line = line.lower()
-            if len(line) == 5:
+            if len(line) == word_length:
                 words.append(line)
     return words
 
 url = "https://raw.githubusercontent.com/dwyl/english-words/master/words.txt"
 
-words = five_dict_create(url)
+words = five_dict_create(url, 5)
 game_word = random.choice(words)
 
 for i in range(0, len(words)):
