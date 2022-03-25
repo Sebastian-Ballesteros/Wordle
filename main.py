@@ -3,10 +3,9 @@ import random
 import numpy as np
 from colorama import Fore
 
-punctuation = "&',.-()?1234567890"
 
 def five_dict_create(url, word_length):
-
+    punctuation = "&',.-()?1234567890"
     words = []
     with urlopen(url) as fp:
         for line in fp:
@@ -17,6 +16,7 @@ def five_dict_create(url, word_length):
             if len(line) == word_length:
                 words.append(line)
     return words
+
 url = "https://raw.githubusercontent.com/dwyl/english-words/master/words.txt"
 
 words = five_dict_create(url, 5)
@@ -86,5 +86,5 @@ while count < 5:
         words_array = np.delete(words_array, pop_words, axis=0)
         print(f"{len(words_array)} words left in the dictionary")
     except:
-        print("You typed the same letter twice")
+        print("The word you typed has no new letters")
         break
