@@ -1,5 +1,6 @@
 from urllib.request import urlopen
 import random
+import numpy as np
 
 local_name = "Wordle_words"
 punctuation = "&',.-()?1234567890"
@@ -20,7 +21,15 @@ url = "https://raw.githubusercontent.com/dwyl/english-words/master/words.txt"
 
 words = five_dict_create(url)
 game_word = random.choice(words)
-print(game_word)
+
+for i in range(0, len(words)):
+    words[i] = list(words[i])
+words_array = np.array(words)
+print(words_array)
+
+
+
+
 
 
 
