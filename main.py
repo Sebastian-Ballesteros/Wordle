@@ -66,7 +66,9 @@ while count < 5:
         print('you did not solve this in the 5 allowed attempts')
     print(set(letters_in_word), set(letters_not_in_word))
 
-    print(set(letters_in_word_and_place))
+    """
+    Eliminating words from dictionary starts here
+    """
 
     pop_words = []
     for word in range(0, len(words)):
