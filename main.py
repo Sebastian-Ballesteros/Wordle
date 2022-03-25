@@ -71,19 +71,23 @@ while count < 5:
     """
 
     pop_words = []
-    for word in range(0, len(words)):
+    for word in range(0, len(words_array)):
         for i in letters_in_word:
             for n in letters_not_in_word:
-                if i not in words[word] or n in words[word]:
+                if i not in words_array[word] or n in words_array[word]:
                     pop_words.append(word)
         for letter, index in set(letters_in_word_and_place):
-            if letter != words[word][int(index)]:
+            if letter != words_array[word][int(index)]:
                 pop_words.append(word)
 
     pop_words = np.unique(pop_words)
-    words = np.delete(words, pop_words, axis=0)
-    print(len(words))
-
+    print(len(pop_words) / len(words_array))
+    try:
+        words_array = np.delete(words_array, pop_words, axis=0)
+        print(len(words_array))
+    except:
+        print("You typed the same letter twice")
+        break
 
 
 
