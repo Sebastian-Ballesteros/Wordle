@@ -19,7 +19,7 @@ def five_dict_create(url):
 url = "https://raw.githubusercontent.com/dwyl/english-words/master/words.txt"
 
 words = five_dict_create(url)
-game_word = words[random.randint(0, len(words))]
+game_word = random.choice(words)
 print(game_word)
 
 
