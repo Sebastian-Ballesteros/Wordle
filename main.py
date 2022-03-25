@@ -26,7 +26,6 @@ game_word = random.choice(words)
 for i in range(0, len(words)):
     words[i] = list(words[i])
 words_array = np.array(words)
-print(words_array)
 
 """
 game starts here
@@ -37,6 +36,7 @@ print(game_word)
 count = 0
 letters_in_word = ""
 letters_not_in_word = ""
+letters_in_word_and_place = []
 while count < 5:
     guess = list(input(Fore.LIGHTWHITE_EX + 'Guess: '))
     print(Fore.LIGHTWHITE_EX + f'your guess was {guess}')
@@ -52,6 +52,8 @@ while count < 5:
         if guess[i] == game_word[i]:
             print(Fore.LIGHTGREEN_EX + guess[i])
             letters_in_word += guess[i]
+            letters_in_word_and_place.append((guess[i], i))
+
         elif guess[i] in game_word:
             print(Fore.YELLOW + guess[i])
             letters_in_word += guess[i]
@@ -64,12 +66,17 @@ while count < 5:
         print('you did not solve this in the 5 allowed attempts')
     print(set(letters_in_word), set(letters_not_in_word))
 
+    print(set(letters_in_word_and_place))
+
     pop_words = []
     for word in range(0, len(words)):
         for i in letters_in_word:
             for n in letters_not_in_word:
                 if i not in words[word] or n in words[word]:
                     pop_words.append(word)
+        for letter, index in set(letters_in_word_and_place):
+            if letter != words[word][int(index)]:
+                pop_words.append(word)
 
     pop_words = np.unique(pop_words)
     words = np.delete(words, pop_words, axis=0)
