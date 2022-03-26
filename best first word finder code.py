@@ -77,5 +77,5 @@ for word in words:
         words_array_short, popped_words = game(game_word, word, words_array)
         avg_popped_words.append(len(list(popped_words)))
     word_elimination_data[str(word)] = np.mean(avg_popped_words)
-    print(word_elimination_data)
+    print(word, word_elimination_data[word])
 print(word_elimination_data)
