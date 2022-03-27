@@ -2,7 +2,7 @@ from urllib.request import urlopen
 import random
 import numpy as np
 
-url = "https://raw.githubusercontent.com/dwyl/english-words/master/words.txt"
+url = "https://raw.githubusercontent.com/Sebastian-Ballesteros/wordle-list/main/words"
 
 
 def five_dict_create(url, word_length):
@@ -16,7 +16,7 @@ def five_dict_create(url, word_length):
             line = line.lower()
             if len(line) == word_length:
                 words.append(line)
-    return np.unique(words)
+    return list(np.unique(words))
 
 
 def words_array(words):
@@ -69,7 +69,6 @@ def game(guess, game_word, words_array):
 
 
 words = five_dict_create(url, 5)
-print(len(np.unique(words)))
 words_array = words_array(words)
 word_elimination_data = {}
 words = five_dict_create(url, 5)
