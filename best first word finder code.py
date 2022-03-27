@@ -16,7 +16,7 @@ def five_dict_create(url, word_length):
             line = line.lower()
             if len(line) == word_length:
                 words.append(line)
-    return words
+    return np.unique(words)
 
 
 def words_array(words):
@@ -33,7 +33,7 @@ def game(guess, game_word, words_array):
 
     if game_word == guess:
         print("right guess")
-        return np.nan, len(range(1, words_array))
+        return np.array(guess), len(range(1, words_array))
 
     for i in range(len(guess)):
         if guess[i] == game_word[i]:
@@ -69,6 +69,7 @@ def game(guess, game_word, words_array):
 
 
 words = five_dict_create(url, 5)
+print(len(np.unique(words)))
 words_array = words_array(words)
 word_elimination_data = {}
 words = five_dict_create(url, 5)
