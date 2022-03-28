@@ -2,21 +2,7 @@ from urllib.request import urlopen
 import random
 import numpy as np
 
-url = "https://raw.githubusercontent.com/Sebastian-Ballesteros/wordle-list/main/words"
 
-
-def five_dict_create(url, word_length):
-    punctuation = "&',.-()?1234567890"
-    words = []
-    with urlopen(url) as fp:
-        for line in fp:
-            line = line.decode('utf-8-sig').strip("b'\n ")
-            for p in punctuation:
-                line = line.replace(p, "hello world")
-            line = line.lower()
-            if len(line) == word_length:
-                words.append(line)
-    return list(np.unique(words))
 
 
 def words_array(words):
@@ -27,17 +13,16 @@ def words_array(words):
 
 
 def game(guess, game_word, words_array):
-    letters_in_word = ""
+    letters_in_word = []
     letters_not_in_word = ""
     letters_in_word_and_place = []
 
     for i in range(len(guess)):
         if guess[i] == game_word[i]:
-            letters_in_word += guess[i]
             letters_in_word_and_place.append((guess[i], i))
 
         elif guess[i] in game_word:
-            letters_in_word += guess[i]
+            letters_in_word.append((guess[i], i))
 
         else:
             letters_not_in_word += guess[i]
@@ -46,14 +31,21 @@ def game(guess, game_word, words_array):
     """
     pop_words = []
     for word in range(0, len(words_array)):
+        """If the letters are not in the guess word, discard words that contain that letter"""
         for i in letters_not_in_word:
             if i in words_array[word]:
                 pop_words.append(word)
 
-        for n in letters_in_word:
-            if n not in words_array[word]:
+        for letter, index in set(letters_in_word):
+            """discard words that do not have a letter in guess word"""
+            if letter not in words_array[word]:
                 pop_words.append(word)
 
+            """discard words that have a letter in word but not in the right place, in the same place as guess word"""
+            if letter == words_array[word][int(index)]:
+                pop_words.append(word)
+
+        "discard letters that dont have the right letter in the right place"
         for letter, index in set(letters_in_word_and_place):
             if letter != words_array[word][int(index)]:
                 pop_words.append(word)
@@ -79,5 +71,6 @@ for word in words:
 
     word_elimination_data[str(word)] = np.mean(avg_popped_words)
     n += 100
+    print(word, len(popped_words))
     print(n / len(words), "%")
 print(word_elimination_data)

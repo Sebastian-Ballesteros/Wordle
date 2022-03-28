@@ -15,7 +15,7 @@ def five_dict_create(url, word_length):
             line = line.lower()
             if len(line) == word_length:
                 words.append(line)
-    return words
+    return list(np.unique(words))
 
 url = "https://raw.githubusercontent.com/dwyl/english-words/master/words.txt"
 
