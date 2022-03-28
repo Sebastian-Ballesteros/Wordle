@@ -31,10 +31,6 @@ def game(guess, game_word, words_array):
     letters_not_in_word = ""
     letters_in_word_and_place = []
 
-    if game_word == guess:
-        print("right guess")
-        return np.array(guess), len(range(1, words_array))
-
     for i in range(len(guess)):
         if guess[i] == game_word[i]:
             letters_in_word += guess[i]
@@ -72,7 +68,7 @@ words = five_dict_create(url, 5)
 words_array = words_array(words)
 word_elimination_data = {}
 words = five_dict_create(url, 5)
-
+n = 1
 for word in words:
     avg_popped_words = []
 
@@ -82,5 +78,6 @@ for word in words:
         avg_popped_words.append(len(list(popped_words)))
 
     word_elimination_data[str(word)] = np.mean(avg_popped_words)
-    print(word, word_elimination_data[word])
+    n += 100
+    print(n / len(words), "%")
 print(word_elimination_data)
