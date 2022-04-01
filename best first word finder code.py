@@ -3,6 +3,7 @@ import numpy as np
 from words import Wordle_words
 """Word list form wordle source code"""
 
+
 def words_array(lst):
     ar = lst[:]
     for i in range(0, len(ar)):
@@ -52,7 +53,7 @@ def game(guess, game_word, words_array):
         if word == pop_words[-1]:
             continue
 
-        "discard letters that dont have the right letter in the right place"
+        "discard letters that don't have the right letter in the right place"
         for letter, index in set(letters_in_word_and_place):
             if letter != words_array[word][int(index)]:
                 pop_words.append(word)
@@ -69,7 +70,6 @@ word_array = words_array(words)
 
 word_elimination_data = {}
 
-
 n = 1
 for word in words:
     avg_popped_words = []
@@ -84,4 +84,3 @@ for word in words:
     print(word, word_elimination_data[word])
     print(round(n / len(words), 1), "%")
 print(word_elimination_data)
-
