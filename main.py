@@ -159,5 +159,5 @@ while count < 5:
         word_elimination_data[str(word)] = np.mean(avg_popped_words)
         n += 100
     print(len(pop_words))
-    print(sorted(word_elimination_data.items(), key=lambda item: item[1], reverse=True))
+    print(sorted(word_elimination_data.items(), key=lambda item: item[1], reverse=True)[0:3])
 
